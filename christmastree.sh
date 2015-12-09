@@ -62,10 +62,16 @@ func2 () {
 COSITAS=( "8" "~" "0" "o" "-" "-" "+" "*" "*" "^" "*" "." "," )
 CENTER=0
 SPACE=" "
-n=20
-while [ 1 ];
-do
- n=41
+arg=$1
+if [ $# -eq 0 ];
+then
+  n=41
+else
+  let n=$1
+fi
+echo $n;
+#while [ 1 ];
+#do
  i="1"
  while [ $i -lt $n ];
  do
@@ -114,6 +120,6 @@ do
   echo ""
   let t=t+1
  done
- eval sleep 2
- eval clear
-done
+# eval sleep 2
+# eval clear
+#done
