@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#Christmass tree by rodrigo.pulido.gf@gmail.com
 BLACK='\033[0;30m'
 GRAY='\033[1;30m'
 RED='\033[0;31m'
