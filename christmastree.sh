@@ -107,13 +107,13 @@ echo $n;
  done
  
  t="1"
- while [ $t -lt "7" ];
+ while [ $t -lt $(($n/10)) ];
  do
-  for b in `seq 1 28`;
+  for b in `seq 1 $(( ($n / 2)+($n /4)))`;
   do
    printf "${SPACE}"
   done
-  for c in `seq 1 24`;
+  for c in `seq 1 $(($n/2))`;
   do
    func1 "BRWORANGE" "#"
   done
