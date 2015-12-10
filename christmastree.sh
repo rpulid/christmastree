@@ -59,24 +59,19 @@ func2 () {
    func1 "${cols["$[RANDOM % ${#cols[@]}]"]}" "${arr[$randnum]}"
   fi
 }
-COSITAS=( "8" "~" "0" "o" "-" "-" "+" "*" "*" "^" "*" "." "," )
-CENTER=0
-SPACE=" "
-arg=$1
-if [ $# -eq 0 ];
-then
-  n=41
-else
-  let n=$1
-fi
-echo $n;
-while [ 1 ];
-do
+
+xmastree() {
+ n=$(($(($(tput lines)*9))/10))
+ if [ $(($n*2)) -gt $(tput cols) ];
+ then
+    n=$(($(tput cols)/2))
+ fi
  i="1"
  while [ $i -lt $n ];
  do
    let k=$i
-   while [ $k -lt $n ];
+   widht=$(($(tput cols)/2))
+   while [ $k -lt $widht ];
    do
      printf "${SPACE}"
      let k=k+1
@@ -106,10 +101,10 @@ do
    echo ""
  done
  
- t="1"
+ t="0"
  while [ $t -lt $(($n/10)) ];
  do
-  for b in `seq 1 $(( ($n / 2)+($n /4)))`;
+  for b in `seq 1 $((widht - ($(($n/4))+1)))`;
   do
    printf "${SPACE}"
   done
@@ -120,6 +115,20 @@ do
   echo ""
   let t=t+1
  done
- eval sleep 2
- eval clear
-done
+}
+
+
+CENTER=0
+SPACE=" "
+arg=$1
+if [ $# -eq 0 ];
+ then
+   n=41
+ else
+   let n=$1
+fi
+xmastree
+#export -f xmastree
+#export -f func1
+#export -f func2
+#watch --color -n .2  "bash --noediting  -c xmastree"
