@@ -70,8 +70,8 @@ else
   let n=$1
 fi
 echo $n;
-#while [ 1 ];
-#do
+while [ 1 ];
+do
  i="1"
  while [ $i -lt $n ];
  do
@@ -120,6 +120,6 @@ echo $n;
   echo ""
   let t=t+1
  done
-# eval sleep 2
-# eval clear
-#done
+ eval sleep 2
+ eval clear
+done
