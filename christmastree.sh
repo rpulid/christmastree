@@ -65,18 +65,31 @@ SPACE=" "
 arg=$1
 if [ $# -eq 0 ];
 then
-  n=41
+#  let n=$LINES
+   let n=$(tput lines)
 else
   let n=$1
 fi
-echo $n;
-while [ 1 ];
-do
+let COLUMNS=$(tput cols)
+if [ $COLUMNS -lt $((n*2)) ]
+then
+  let n=$((COLUMNS/2))
+fi
+#echo "N is $n"
+#echo "Lines is $LINES"
+#echo "Cols is $COLUMNS"
+#echo $n;
+#eval resize -u -s $((n+4)) $((n*2))
+#while [ 1 ];
+#do
+#eval resize -u -s $((n+1)) $((n*2))
+eval clear
  i="1"
  while [ $i -lt $n ];
  do
    let k=$i
-   while [ $k -lt $n ];
+   let w=$(($(tput cols)/2))
+   while [ $k -lt $w ];
    do
      printf "${SPACE}"
      let k=k+1
@@ -106,10 +119,11 @@ do
    echo ""
  done
  
- t="1"
+ t="0"
  while [ $t -lt $(($n/10)) ];
  do
-  for b in `seq 1 $(( ($n / 2)+($n /4)))`;
+#  for b in `seq 1 $(( ($n / 2)+($n /4)))`;
+  for b in `seq 1 $((w - ($(($n/4))+1)))`
   do
    printf "${SPACE}"
   done
@@ -120,6 +134,8 @@ do
   echo ""
   let t=t+1
  done
- eval sleep 2
- eval clear
-done
+
+#eval resize -u -s $((n+4)) $(($((w*2)))) >&null
+# eval sleep 1
+# eval clear
+#done
