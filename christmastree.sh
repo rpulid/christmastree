@@ -120,15 +120,14 @@ xmastree() {
 
 CENTER=0
 SPACE=" "
-arg=$1
-if [ $# -eq 0 ];
+arg1=$1
+if [ $# -gt 0 ];
  then
-   n=41
+    case "$arg1" in
+        loop)
+    	watch --color -n .2 ./christmastree.sh
+    ;;
+    esac
  else
-   let n=$1
+  xmastree
 fi
-xmastree
-#export -f xmastree
-#export -f func1
-#export -f func2
-#watch --color -n .2  "bash --noediting  -c xmastree"
