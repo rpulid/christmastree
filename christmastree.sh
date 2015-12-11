@@ -59,37 +59,18 @@ func2 () {
    func1 "${cols["$[RANDOM % ${#cols[@]}]"]}" "${arr[$randnum]}"
   fi
 }
-COSITAS=( "8" "~" "0" "o" "-" "-" "+" "*" "*" "^" "*" "." "," )
-CENTER=0
-SPACE=" "
-arg=$1
-if [ $# -eq 0 ];
-then
-#  let n=$LINES
-   let n=$(tput lines)
-else
-  let n=$1
-fi
-let COLUMNS=$(tput cols)
-if [ $COLUMNS -lt $((n*2)) ]
-then
-  let n=$((COLUMNS/2))
-fi
-#echo "N is $n"
-#echo "Lines is $LINES"
-#echo "Cols is $COLUMNS"
-#echo $n;
-#eval resize -u -s $((n+4)) $((n*2))
-#while [ 1 ];
-#do
-#eval resize -u -s $((n+1)) $((n*2))
-eval clear
+xmastree() {
+ n=$(($(($(tput lines)*9))/10))
+ if [ $(($n*2)) -gt $(tput cols) ];
+ then
+    n=$(($(tput cols)/2))
+ fi
  i="1"
  while [ $i -lt $n ];
  do
    let k=$i
-   let w=$(($(tput cols)/2))
-   while [ $k -lt $w ];
+   widht=$(($(tput cols)/2))
+   while [ $k -lt $widht ];
    do
      printf "${SPACE}"
      let k=k+1
@@ -122,8 +103,7 @@ eval clear
  t="0"
  while [ $t -lt $(($n/10)) ];
  do
-#  for b in `seq 1 $(( ($n / 2)+($n /4)))`;
-  for b in `seq 1 $((w - ($(($n/4))+1)))`
+  for b in `seq 1 $((widht - ($(($n/4))+1)))`;
   do
    printf "${SPACE}"
   done
@@ -134,8 +114,17 @@ eval clear
   echo ""
   let t=t+1
  done
-
-#eval resize -u -s $((n+4)) $(($((w*2)))) >&null
-# eval sleep 1
-# eval clear
-#done
+}
+CENTER=0
+SPACE=" "
+arg1=$1
+if [ $# -gt 0 ];
+ then
+    case "$arg1" in
+        loop)
+    	watch --color -n .2 ./christmastree.sh
+    ;;
+    esac
+ else
+  xmastree
+fi
